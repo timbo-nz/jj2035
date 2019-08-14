@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Bomber.gd" type="Script" id=1]
+[ext_resource path="res://pBomb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/air_sprites/air_units_big/bomber_0.png" type="Texture" id=3]
+[ext_resource path="res://sprites/air_sprites/air_units_big/bomber_1.png" type="Texture" id=4]
+[ext_resource path="res://sprites/air_sprites/air_units_big/bomber_2.png" type="Texture" id=5]
+[ext_resource path="res://sprites/air_sprites/air_units_big/bomber_3.png" type="Texture" id=6]
+[ext_resource path="res://sprites/air_sprites/air_units_big/bomber_4.png" type="Texture" id=7]
+[ext_resource path="res://sprites/air_sprites/air_units_big/bomber_5.png" type="Texture" id=8]
+[ext_resource path="res://smoke_particles.tscn" type="PackedScene" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "default",
+"speed": 24.0
+} ]
+
+[node name="Bomber" type="RigidBody2D"]
+collision_layer = 2
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 0.0
+script = ExtResource( 1 )
+projectile = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+frame = 5
+playing = true
+centered = false
+
+[node name="bombBay" type="Position2D" parent="Sprite"]
+position = Vector2( 71, 43 )
+
+[node name="smokeParticlesPos" parent="Sprite" instance=ExtResource( 9 )]
+modulate = Color( 1, 1, 1, 0.235294 )
+position = Vector2( 79, 33 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+position = Vector2( 13, 43 )
+polygon = PoolVector2Array( 6, -9, -5, -14, -13, -21, -13, -37, -12, -38, -4, -38, 12, -22, 13, -21, 101, -21, 106, -19, 110, -15, 113, -12, 113, -8, 110, -6, 107, -4, 101, -1, 29, -1 )
+
+[node name="shotTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="body_entered" from="." to="." method="_on_Bomber_body_entered"]
+[connection signal="timeout" from="shotTimer" to="." method="_on_shotTimer_timeout"]
