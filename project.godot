@@ -16,12 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Jump Jet 2035"
-run/main_scene="res://Level_1_Mission_Screen.tscn"
+run/main_scene="res://scenes/Level_1_Mission_Screen.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-GameController="*res://GameController.tscn"
+GameController="*res://scenes/GameController.tscn"
 
 [input]
 
