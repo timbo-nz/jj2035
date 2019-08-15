@@ -26,6 +26,7 @@ var TYPE = "JET"
 func _ready():
 	var pitchScale = rand_range(0.85, 1.2)
 	$Engine.set_pitch_scale(pitchScale)
+	$Explosion.set_pitch_scale(rand_range(0.6, 0.8))
 	var waitTime = rand_range(1, 4)
 	$shotTimer.set_wait_time(waitTime)
 	$shotTimer.start()
@@ -77,13 +78,14 @@ func _on_Enemy_Jet_body_entered(body):
 	
 	if STATE == STATE_KILLED:
 		_explode()
-	elif STATE == STATE_EXPLODED && !$Explosion.playing:
+	
+	if STATE == STATE_EXPLODED && !$Explosion.playing:
 		queue_free()
-	else:
-		_crash_plane()
-		
+
 func _explode():
 	STATE = STATE_EXPLODED
+	sprite.visible = false
+	remove_child($Hitbox)
 	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
@@ -91,11 +93,11 @@ func _explode():
 		$Explosion.play()
 
 func _crash_plane():
+	STATE = STATE_KILLED
 	$Explosion.play()
 	emit_signal("minus_enemy_count", TYPE)
-	STATE = STATE_KILLED
 	self.gravity_scale = 1
-	self.linear_damp = -4
+	self.linear_damp = -1
 	var fireParticles = preload("res://scenes/particles/fire_particles.tscn").instance()
 	var smokeParticles = preload("res://scenes/particles/smoke_particles.tscn").instance()
 	add_child(fireParticles)

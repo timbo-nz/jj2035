@@ -11,6 +11,10 @@ func _ready():
 	$Sprite/smokeParticles.emitting = true
 	var pitchScale = rand_range(1.2, 1.5)
 	$Explosion.set_pitch_scale(pitchScale)
+	
+	var whooshScale = rand_range(0.3, 0.5)
+	$Whoosh.set_pitch_scale(whooshScale)
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

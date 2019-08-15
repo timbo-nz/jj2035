@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Whoosh,Organic,Fabric,Glove,Airy,Breathy,Punchy.wav-6b93850c45f1eaf60280157f1c47a978.sample"
+
+[deps]
+
+source_file="res://sfx/Whoosh,Organic,Fabric,Glove,Airy,Breathy,Punchy.wav"
+dest_files=[ "res://.import/Whoosh,Organic,Fabric,Glove,Airy,Breathy,Punchy.wav-6b93850c45f1eaf60280157f1c47a978.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

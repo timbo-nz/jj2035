@@ -14,6 +14,8 @@ export (PackedScene) var projectile
 onready var sprite = $Sprite
 onready var hitbox = $Hitbox
 
+var FLOOR_NORMAL = Vector2(0, -1)
+
 var STATE_LIVE = "STATE_LIVE"
 var STATE_KILLED = "STATE_KILLED"
 
@@ -90,7 +92,7 @@ func _physics_process(delta):
 			flipCount = 0
 		velocity.y += 9.8
 	
-	velocity = move_and_slide(velocity, Vector2(0, -1))
+	velocity = move_and_slide(velocity, FLOOR_NORMAL)
 	
 	if STATE == STATE_KILLED:
 		if $deathTimer.is_stopped():
