@@ -27,6 +27,7 @@ func _ready():
 	randomNum.randomize()
 	_spawn_objective()
 	emit_signal("update_mission_status_text", needed_to_win - objective_count)
+	emit_signal("update_score")
 	pass # Replace with function body.
 
 func check_win():

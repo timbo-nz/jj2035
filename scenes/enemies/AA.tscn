@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/AA.gd" type="Script" id=1]
 [ext_resource path="res://sprites/ground_sprites/aa_gun.png" type="Texture" id=2]
 [ext_resource path="res://sprites/ground_sprites/aa.png" type="Texture" id=3]
+[ext_resource path="res://sfx/single-shot.wav" type="AudioStream" id=4]
 
 [node name="aa" type="StaticBody2D"]
 collision_layer = 2
@@ -31,3 +32,7 @@ polygon = PoolVector2Array( -9, 11, -6, 7, -4, -1, 4, -1, 5, 7, 8, 11, 8, 16, -9
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -12.0

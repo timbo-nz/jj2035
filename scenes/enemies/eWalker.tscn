@@ -4,17 +4,15 @@
 [ext_resource path="res://scenes/projectiles/pBullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/ground_sprites/walker/walker_00.png" type="Texture" id=3]
 [ext_resource path="res://sprites/ground_sprites/walker/walker_01.png" type="Texture" id=4]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_06.png" type="Texture" id=5]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_07.png" type="Texture" id=6]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_08.png" type="Texture" id=7]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_02.png" type="Texture" id=8]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_03.png" type="Texture" id=9]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_04.png" type="Texture" id=10]
-[ext_resource path="res://sprites/ground_sprites/walker/walker_05.png" type="Texture" id=11]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_02.png" type="Texture" id=5]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_03.png" type="Texture" id=6]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_04.png" type="Texture" id=7]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_05.png" type="Texture" id=8]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_06.png" type="Texture" id=9]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_07.png" type="Texture" id=10]
+[ext_resource path="res://sprites/ground_sprites/walker/walker_08.png" type="Texture" id=11]
 [ext_resource path="res://sfx/Howitzer,M101,C3,105 mm,Distant,Right Side,Shot,Explode,Crack,Sweetener.wav" type="AudioStream" id=12]
 [ext_resource path="res://sfx/jump.wav" type="AudioStream" id=13]
-
-
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,15 +21,15 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "shoot",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "jump",
 "speed": 24.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "shoot",
+"speed": 12.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -40,6 +38,7 @@ radius = 289.772
 [node name="Walker" type="KinematicBody2D"]
 script = ExtResource( 1 )
 projectile = ExtResource( 2 )
+HP = 1
 
 [node name="Anim" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

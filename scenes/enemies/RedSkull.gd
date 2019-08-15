@@ -5,6 +5,9 @@ extends KinematicBody2D
 # var b = "text"
 onready var gunPos = $Mouth
 onready var sprite = $Sprite
+
+var TYPE = "RED_SKULL"
+signal minus_enemy_count
 # Called when the node enters the scene tree for the first time.
 
 var STATE
@@ -15,6 +18,8 @@ var STATE_DEAD = "STATE_DEAD"
 var ALERTED = false
 
 var dying = false
+
+var anim = ""
 
 var shoot_time = 0
 export (int) var SPEED
@@ -27,6 +32,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var playerPos = get_parent().get_node("Player").global_position
+	
+	var new_anim = "idle"
 	
 	if self.global_position.distance_to(playerPos) < 800:
 		ALERTED = true
@@ -46,13 +53,19 @@ func _process(delta):
 			shoot_time += 10
 			if shoot_time > 400:
 				_shoot(playerPos)
+				new_anim = "shoot"
 
-	elif STATE == STATE_DEAD:
+	if STATE == STATE_DEAD:
+		new_anim = "dead"
 		_die()
 		var direction = Vector2(0, 1).normalized()
 		var motion = direction * SPEED * delta
 		position += motion
-
+		
+	if new_anim != anim:
+		anim = new_anim
+		sprite.play(anim)
+	
 func _die():
 	sprite.play("dead")
 	if !dying:
@@ -66,9 +79,9 @@ func hit_by_projectile():
 	if HP == 0:
 		remove_child($Hitbox)
 		STATE = STATE_DEAD
+		emit_signal("minus_enemy_count", TYPE)
 
 func _shoot(target):	
-	sprite.play("shoot")
 	$Shoot.set_pitch_scale(rand_range(0.8, 1.2))
 	$Shoot.play()
 	var p1 = preload("res://scenes/projectiles/pTracer.tscn").instance()

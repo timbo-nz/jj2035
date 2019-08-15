@@ -10,23 +10,24 @@
 [ext_resource path="res://sfx/sci-fi_weapon_blaster_laser_boom_zap_08.wav" type="AudioStream" id=8]
 [ext_resource path="res://sfx/redskull-movement.wav" type="AudioStream" id=9]
 
-[sub_resource type="Curve" id=3]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.00940001 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
+angular_velocity = 1.2729e-029
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.8
 scale_random = 0.5
-scale_curve = SubResource( 4 )
+scale_curve = SubResource( 2 )
 color = Color( 1, 1, 1, 0.482353 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ) ],
 "loop": true,
@@ -52,12 +53,13 @@ HP = 2
 [node name="Particles2D" type="Particles2D" parent="."]
 lifetime = 0.5
 local_coords = false
-process_material = SubResource( 2 )
+process_material = SubResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+frames = SubResource( 4 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="."]
@@ -71,4 +73,4 @@ volume_db = -6.0
 
 [node name="Movement" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
-volume_db = -6.0
+attenuation = 1.8025

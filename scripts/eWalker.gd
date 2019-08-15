@@ -5,10 +5,14 @@ export (PackedScene) var projectile
 # var a = 2
 # var b = "text"
 
+var TYPE = "WALKER"
+signal minus_enemy_count
+
 var velocity = Vector2()
 var jumping = false
 var newAnim = false
 
+export (int) var HP
 
 var playerInRange = false
 
@@ -70,6 +74,15 @@ func shoot(target):
 	explosionParticles.position = shotPos.global_position
 	get_parent().add_child(explosionParticles)
 
+
+func hit_by_projectile():
+	HP -= 1
+	if HP == 0:
+		var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
+		explosionParticles.position = shotPos.global_position
+		emit_signal("minus_enemy_count", TYPE)
+		get_parent().add_child(explosionParticles)
+		queue_free()
 
 func _on_Area2D_body_entered(body):
 	if body.name == "Player":

@@ -102,7 +102,8 @@ func _physics_process(delta):
 		get_parent().add_child(explosionParticles)
 
 func hit_by_projectile():
-	STATE = STATE_KILLED
+	# STATE = STATE_KILLED
+	pass
 
 func _on_deathTimer_timeout():
 	queue_free()
@@ -112,4 +113,5 @@ func _on_update_score():
 	emit_signal("update_hud_score")
 
 func _on_update_mission_status_text(objectivesLeft):
+	print("mst", objectivesLeft)
 	emit_signal("update_hud_mission_status_text", objectivesLeft)

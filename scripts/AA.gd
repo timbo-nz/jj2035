@@ -18,6 +18,8 @@ var shoot_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var pitchScale = rand_range(0.5, 0.8)
+	$Shoot.set_pitch_scale(pitchScale)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,7 +47,8 @@ func _explode():
 	get_parent().add_child(explosionParticles)
 	queue_free()
 
-func _shoot(target):	
+func _shoot(target):
+	$Shoot.play()
 	var p1 = preload("res://scenes/projectiles/pTracer.tscn").instance()
 	p1.position = gun1Pos.global_position
 	
@@ -59,6 +62,8 @@ func _shoot(target):
 	
 	p1.gravity_scale = 0
 	p2.gravity_scale = 0
+	p1.linear_damp = 0
+	p2.linear_damp = 0
 	
 	get_parent().add_child(p1)
 	get_parent().add_child(p2)
