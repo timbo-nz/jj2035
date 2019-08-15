@@ -24,7 +24,6 @@ projectile = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="smokeParticlesPos" parent="AnimatedSprite" instance=ExtResource( 5 )]

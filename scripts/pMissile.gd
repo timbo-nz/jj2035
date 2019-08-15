@@ -16,7 +16,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if STATE == STATE_EXPLODED && !$Explosion.playing:
-		print("removing")
 		queue_free()
 	if self.position.x > 6000:
 		self.position.x = 0

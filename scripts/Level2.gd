@@ -115,6 +115,7 @@ func _on_spawnTimer_timeout():
 
 
 func _on_Base_base_entered():
+	print(WIN_STATE)
 	if WIN_STATE:
-		get_tree().change_scene("res://scenes/levels/TitleScreen.tscn")
+		get_tree().change_scene("res://scenes/levels/Level_1_Mission_Screen.tscn")
 

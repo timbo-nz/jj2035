@@ -10,7 +10,6 @@ signal minus_enemy_count
 export (int) var HP
 
 onready var gunSprite = $gunSprite
-onready var gunRotation = $bodySprite/gunRotation
 
 onready var gun1Pos = $gunSprite/gun1Pos
 onready var gun2Pos = $gunSprite/gun2Pos
@@ -19,13 +18,13 @@ var shoot_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	HP = rand_range(1, 2)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var playerPos = get_parent().get_node("Player").global_position
-
+	#var playerPos = get_global_mouse_position();
+	
 	if gunSprite.global_position.distance_to(playerPos) < 500:
 		shoot_time += 10
 		gunSprite.look_at(playerPos)
