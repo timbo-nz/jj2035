@@ -11,7 +11,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _on_Base_body_entered(body):	
+func _on_Base_body_entered(body):
 	emit_signal("base_entered")
 	pass # Replace with function body.
 

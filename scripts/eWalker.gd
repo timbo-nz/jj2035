@@ -37,7 +37,7 @@ func _physics_process(delta):
 	
 	# shoot at apex of jump
 	if !is_on_floor() && velocity.y < 1 && velocity.y > -1:
-		shoot()
+		shoot(playerPos)
 		
 
 
@@ -48,12 +48,13 @@ func jump():
 	velocity.y = rand_range(-150, -250)
 	$JumpSound.play()
 	
-func shoot():
+func shoot(target):
 	var shot = projectile.instance()
 	shot.position = shotPos.global_position #use node for shoot position
 	
-	var shotVelX = rand_range(175, 250)
-	shot.linear_velocity = Vector2(self.velocity.x + shotVelX * -sprite.scale.x, self.velocity.y)
+	var shot_velocity = -(self.global_position - target).normalized() * 500
+	
+	shot.linear_velocity = shot_velocity
 	shot.add_collision_exception_with(self) # don't want player to collide with bullet
 	get_parent().add_child(shot) #don't want bullet to move with me, so add it as child of parent
 	sprite.play("shoot")

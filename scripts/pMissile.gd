@@ -25,8 +25,6 @@ func _process(delta):
 		self.position.x = 0
 	if self.position.x < 0:
 		self.position.x = 6000
-	
-#	pass
 
 func _on_fuze_timeout():
 	if STATE != STATE_EXPLODED:

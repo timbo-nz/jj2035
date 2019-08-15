@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/enemies/RedSkull.gd" type="Script" id=1]
+[ext_resource path="res://sprites/air_sprites/red_skull/red_skull_0.png" type="Texture" id=2]
+[ext_resource path="res://sprites/air_sprites/red_skull/red_skull_2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/air_sprites/red_skull/red_skull_3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/air_sprites/red_skull/red_skull_6.png" type="Texture" id=5]
+[ext_resource path="res://sprites/air_sprites/red_skull/red_skull_7.png" type="Texture" id=6]
+[ext_resource path="res://sprites/air_sprites/red_skull/red_skull_1.png" type="Texture" id=7]
+[ext_resource path="res://sfx/sci-fi_weapon_blaster_laser_boom_zap_08.wav" type="AudioStream" id=8]
+[ext_resource path="res://sfx/redskull-movement.wav" type="AudioStream" id=9]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.00940001 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.8
+scale_random = 0.5
+scale_curve = SubResource( 4 )
+color = Color( 1, 1, 1, 0.482353 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "shoot",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+} ]
+
+[node name="RedSkull" type="KinematicBody2D"]
+script = ExtResource( 1 )
+SPEED = 200
+HP = 2
+
+[node name="Particles2D" type="Particles2D" parent="."]
+lifetime = 0.5
+local_coords = false
+process_material = SubResource( 2 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -5, 14, 5, 14, 13, 6, 15, 1, 15, -8, 8, -14, 5, -15, -5, -15, -8, -14, -15, -8, -15, 1, -13, 6 )
+
+[node name="Mouth" type="Position2D" parent="."]
+
+[node name="Shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -6.0
+
+[node name="Movement" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -6.0

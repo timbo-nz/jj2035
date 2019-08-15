@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Level3.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/TileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/enemies/eWalker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemies/RedSkull.tscn" type="PackedScene" id=7]
 
 [node name="Level3" type="Node"]
 script = ExtResource( 1 )
@@ -36,5 +37,8 @@ position = Vector2( 1152, 1025.2 )
 
 [node name="Walker4" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1536, 1015.6 )
+
+[node name="RedSkull" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1961, 800 )
 [connection signal="timeout" from="spawnTimer" to="." method="_on_spawnTimer_timeout"]
 [connection signal="base_entered" from="Base" to="." method="_on_Base_base_entered"]
