@@ -22,7 +22,8 @@ onready var hitbox = $Hitbox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	var pitchScale = rand_range(0.85, 1.2)
+	$AudioStreamPlayer2D.set_pitch_scale(pitchScale)
 
 func hit_by_projectile():
 	_crash_plane()
@@ -52,17 +53,19 @@ func _on_Bomber_body_entered(body):
 		_crash_plane()
 
 func _crash_plane():
+	$Explosion.play()
 	STATE = STATE_KILLED
 	self.gravity_scale = 1
 	self.linear_damp = -1
-	var fireParticles = preload("res://scenes/fire_particles.tscn").instance()
-	var smokeParticles = preload("res://scenes/smoke_particles.tscn").instance()
+	var fireParticles = preload("res://scenes/particles/fire_particles.tscn").instance()
+	var smokeParticles = preload("res://scenes/particles/smoke_particles.tscn").instance()
 	add_child(fireParticles)
 	add_child(smokeParticles)
 
 func _explode():
+	$Explosion.play()
 	emit_signal("minus_enemy_count", TYPE)
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()	
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()	
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
 	queue_free()

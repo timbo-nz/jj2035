@@ -112,7 +112,7 @@ func _on_SpawnTimer_timeout():
 
 func _on_Base_base_entered():
 	if WIN_STATE:
-		get_tree().change_scene("res://scenes/Level_2_Mission_Screen.tscn")
+		get_tree().change_scene("res://scenes/levels/Level_2_Mission_Screen.tscn")
 	else:
 		print(String(needed_to_win - objective_count) + " bombers left.")
 	pass # Replace with function body.

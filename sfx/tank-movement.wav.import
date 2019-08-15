@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tank-movement.wav-8792cfe3df61c587d46fa66eb8c6ded4.sample"
+
+[deps]
+
+source_file="res://sfx/tank-movement.wav"
+dest_files=[ "res://.import/tank-movement.wav-8792cfe3df61c587d46fa66eb8c6ded4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

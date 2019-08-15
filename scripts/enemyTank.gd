@@ -22,21 +22,27 @@ var linear_vel = Vector2()
 export var min_speed = 50
 export var max_speed = 100
 
+var STATE
+
+var STATE_ALIVE = "STATE_ALIVE"
+var STATE_KILLED = "STATE_KILLED"
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	STATE = STATE_ALIVE
 	speed = rand_range(min_speed, max_speed)
+	$Engine.set_pitch_scale(rand_range(0.85, 1.2))
 	
 func hit_by_projectile():	
-	print("take damage")
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()	
+	STATE = STATE_KILLED
+	$Explosion.play()
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()	
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
-	emit_signal("minus_enemy_count", TYPE)
-	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -46,9 +52,20 @@ func _physics_process(delta):
 		DIRECTION = RIGHT
 	if(self.position.x > 6000):
 		DIRECTION = LEFT
+	
+	if STATE == STATE_ALIVE:
+		sprite.scale.x = 2 * DIRECTION
+		$Hitbox.scale.x = 2 * DIRECTION
+		linear_vel.x = speed * DIRECTION
+	
+	if STATE == STATE_KILLED:
+		emit_signal("minus_enemy_count", TYPE)
+		sprite.visible = false
+		$Engine.stop()
+		remove_child($Hitbox)
+		if !$Explosion.playing:
+			queue_free()
 		
-	sprite.scale.x = 2 *DIRECTION
-	linear_vel.x = speed * DIRECTION		
 
 func _on_shotTimer_timeout():
 		var shot = projectile.instance()

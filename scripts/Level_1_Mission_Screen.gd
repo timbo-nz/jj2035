@@ -9,7 +9,7 @@ func _process(delta):
 		_start_game()
 
 func _start_game():
-	get_tree().change_scene("res://scenes/Level1.tscn")
+	get_tree().change_scene("res://scenes/levels/Level1.tscn")
 
 func _on_StartButton_pressed():
 	_start_game()

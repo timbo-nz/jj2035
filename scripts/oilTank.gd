@@ -26,7 +26,7 @@ func hit_by_projectile():
 func _explode():
 	print("oil tank exploding")
 	emit_signal("minus_enemy_count", TYPE)
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
 	sprite.visible = false

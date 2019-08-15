@@ -7,7 +7,7 @@ onready var player = $Player
 
 var tileSize = 32
 var mapSize = 6000
-var floorHeight = 1024
+var floorHeight = 1040
 
 export (int) var needed_to_win = 5
 
@@ -29,13 +29,13 @@ func _ready():
 
 func _spawn_objectives():	
 	while obj_to_place > 0:
-		var oilTank = preload("res://scenes/oilTank.tscn").instance()
+		var oilTank = preload("res://scenes/enemies/oilTank.tscn").instance()
 		var position = Vector2(rand_range(32, mapSize/tileSize) * tileSize, floorHeight)
 		oilTank.connect("minus_enemy_count", self, "_minus_enemy_count")
 		oilTank.position = position
 		add_child(oilTank)
 		
-		var aaGun = preload("res://scenes/AA.tscn").instance()
+		var aaGun = preload("res://scenes/enemies/AA.tscn").instance()
 		var pos = Vector2(oilTank.position.x + 64, oilTank.position.y)
 		aaGun.position = pos
 		add_child(aaGun)
@@ -48,7 +48,7 @@ func _spawn_intial_enemies(numToSpawn):
 
 func _spawn_tank():
 	activeEnemies += 1
-	var tank = preload("res://scenes/enemyTank.tscn").instance()
+	var tank = preload("res://scenes/enemies/enemyTank.tscn").instance()
 	var position = Vector2(rand_range(16, mapSize/tileSize) * tileSize, floorHeight)
 	tank.connect("minus_enemy_count", self, "_minus_enemy_count")
 	tank.position = position
@@ -56,7 +56,7 @@ func _spawn_tank():
 
 func _spawn_jet():
 	activeEnemies += 1
-	var jet = preload("res://scenes/Enemy_Jet.tscn").instance()
+	var jet = preload("res://scenes/enemies/Enemy_Jet.tscn").instance()
 	var position = Vector2(rand_range(0, mapSize/tileSize) * tileSize, rand_range(32, floorHeight - 8 * 32))
 	jet.connect("minus_enemy_count", self, "_minus_enemy_count")
 	jet.position = position
@@ -65,7 +65,7 @@ func _spawn_jet():
 
 func _spawn_bomber():
 	activeEnemies += 1
-	var bomber = preload("res://scenes/Bomber.tscn").instance()
+	var bomber = preload("res://scenes/enemies/Bomber.tscn").instance()
 	var position = Vector2(rand_range(0, mapSize/tileSize) * tileSize, rand_range(32, floorHeight - 8 * 32))
 	bomber.connect("minus_enemy_count", self, "_minus_enemy_count")
 	bomber.position = position	
@@ -116,5 +116,5 @@ func _on_spawnTimer_timeout():
 
 func _on_Base_base_entered():
 	if WIN_STATE:
-		get_tree().change_scene("res://scenes/TitleScreen.tscn")
+		get_tree().change_scene("res://scenes/levels/TitleScreen.tscn")
 

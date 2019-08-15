@@ -16,7 +16,7 @@ func _ready():
 func _on_Bomb_body_entered(body):
 	if body.has_method("hit_by_projectile"):
 		body.call("hit_by_projectile")
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()	
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()	
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)	
 	queue_free()

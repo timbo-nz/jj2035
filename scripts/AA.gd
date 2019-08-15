@@ -41,16 +41,16 @@ func hit_by_projectile():
 		
 func _explode():
 	emit_signal("minus_enemy_count", TYPE)
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
 	queue_free()
 
 func _shoot(target):	
-	var p1 = preload("res://scenes/pTracer.tscn").instance()
+	var p1 = preload("res://scenes/projectiles/pTracer.tscn").instance()
 	p1.position = gun1Pos.global_position
 	
-	var p2 = preload("res://scenes/pTracer.tscn").instance()
+	var p2 = preload("res://scenes/projectiles/pTracer.tscn").instance()
 	p2.position = gun2Pos.global_position
 	
 	var shot_velocity = -(self.global_position - target).normalized() * 500

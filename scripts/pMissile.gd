@@ -26,7 +26,7 @@ func _on_Missile_body_entered(body):
 	
 
 func _explode():
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
 	queue_free()

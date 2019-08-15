@@ -95,7 +95,7 @@ func _physics_process(delta):
 	if STATE == STATE_KILLED:
 		if $deathTimer.is_stopped():
 			$deathTimer.start()
-		var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()
+		var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 		explosionParticles.position = self.global_position
 		get_parent().add_child(explosionParticles)
 

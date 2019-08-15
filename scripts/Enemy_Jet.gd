@@ -10,7 +10,7 @@ export var max_speed = 450
 onready var sprite = $Sprite
 onready var hitbox = $Hitbox
 
-
+var STATE_EXPLODED = "STATE_EXPLODED"
 var STATE_KILLED = "STATE_KILLED"
 var STATE_LIVE = "STATE_LIVE"
 
@@ -24,7 +24,9 @@ var TYPE = "JET"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var pitchScale = rand_range(0.85, 1.2)
+	$Engine.set_pitch_scale(pitchScale)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,6 +44,9 @@ func _process(delta):
 		self.linear_velocity = Vector2(rand_range(min_speed, max_speed), 0)
 	if(self.position.x > 6000):
 		self.linear_velocity =  Vector2(rand_range(min_speed, max_speed) * -1, 0)
+		
+	if STATE == STATE_EXPLODED && !$Explosion.playing:
+		queue_free()
 
 func hit_by_projectile():
 	_crash_plane()
@@ -75,17 +80,19 @@ func _on_Enemy_Jet_body_entered(body):
 		_crash_plane()
 		
 func _explode():
-	var explosionParticles = preload("res://scenes/explosion_particles.tscn").instance()
+	STATE = STATE_EXPLODED
+	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
-	queue_free()
-		
+	$Explosion.play()
+
 func _crash_plane():
+	$Explosion.play()
 	emit_signal("minus_enemy_count", TYPE)
 	STATE = STATE_KILLED
 	self.gravity_scale = 1
 	self.linear_damp = -4
-	var fireParticles = preload("res://scenes/fire_particles.tscn").instance()
-	var smokeParticles = preload("res://scenes/smoke_particles.tscn").instance()
+	var fireParticles = preload("res://scenes/particles/fire_particles.tscn").instance()
+	var smokeParticles = preload("res://scenes/particles/smoke_particles.tscn").instance()
 	add_child(fireParticles)
 	add_child(smokeParticles)

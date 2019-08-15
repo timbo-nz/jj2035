@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bomber-engine.wav-ba594daacfb17e8d4afdd8ad17f2a4df.sample"
+
+[deps]
+
+source_file="res://sfx/bomber-engine.wav"
+dest_files=[ "res://.import/bomber-engine.wav-ba594daacfb17e8d4afdd8ad17f2a4df.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/oilTank.gd" type="Script" id=1]
+[ext_resource path="res://sprites/ground_sprites/oil.png" type="Texture" id=2]
+[ext_resource path="res://sprites/ground_sprites/oil_destroyed.png" type="Texture" id=3]
+[ext_resource path="res://scenes/particles/fire_particles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/particles/smoke_particles.tscn" type="PackedScene" id=5]
+
+[node name="oilTank" type="StaticBody2D"]
+collision_layer = 2
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -16, -14, -10, -16, 10, -16, 16, -14, 16, 11, 10, 13, -10, 13, -16, 11 )
+
+[node name="deadSprite" type="Sprite" parent="."]
+editor/display_folded = true
+visible = false
+texture = ExtResource( 3 )
+
+[node name="fireParticlesPos" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( -6, 9 )
+
+[node name="fireParticlesPos2" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( -2, 9 )
+
+[node name="fireParticlesPos3" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( 5, 9 )
+
+[node name="fireParticlesPos4" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( 2, 9 )
+
+[node name="fireParticlesPos5" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( 10, 6 )
+
+[node name="fireParticlesPos6" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( 13, 3 )
+
+[node name="fireParticlesPos7" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( -10, 8 )
+
+[node name="fireParticlesPos8" parent="deadSprite" instance=ExtResource( 4 )]
+position = Vector2( -14, 9 )
+
+[node name="smokeParticlesPos" parent="deadSprite" instance=ExtResource( 5 )]
+position = Vector2( -8, 8 )
+
+[node name="smokeParticlesPos2" parent="deadSprite" instance=ExtResource( 5 )]
+position = Vector2( -1, 9 )
+
+[node name="smokeParticlesPos3" parent="deadSprite" instance=ExtResource( 5 )]
+position = Vector2( 7, 8 )
