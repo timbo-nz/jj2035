@@ -24,6 +24,9 @@ onready var hitbox = $Hitbox
 func _ready():
 	var pitchScale = rand_range(0.85, 1.2)
 	$AudioStreamPlayer2D.set_pitch_scale(pitchScale)
+	var waitTime = rand_range(2, 6)
+	$shotTimer.set_wait_time(waitTime)
+	$shotTimer.start()
 
 func hit_by_projectile():
 	_crash_plane()

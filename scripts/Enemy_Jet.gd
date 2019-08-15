@@ -26,6 +26,10 @@ var TYPE = "JET"
 func _ready():
 	var pitchScale = rand_range(0.85, 1.2)
 	$Engine.set_pitch_scale(pitchScale)
+	var waitTime = rand_range(1, 4)
+	$shotTimer.set_wait_time(waitTime)
+	$shotTimer.start()
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,9 +48,6 @@ func _process(delta):
 		self.linear_velocity = Vector2(rand_range(min_speed, max_speed), 0)
 	if(self.position.x > 6000):
 		self.linear_velocity =  Vector2(rand_range(min_speed, max_speed) * -1, 0)
-		
-	if STATE == STATE_EXPLODED && !$Explosion.playing:
-		queue_free()
 
 func hit_by_projectile():
 	_crash_plane()
@@ -76,6 +77,8 @@ func _on_Enemy_Jet_body_entered(body):
 	
 	if STATE == STATE_KILLED:
 		_explode()
+	elif STATE == STATE_EXPLODED && !$Explosion.playing:
+		queue_free()
 	else:
 		_crash_plane()
 		
@@ -84,7 +87,8 @@ func _explode():
 	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
-	$Explosion.play()
+	if !$Explosion.playing:
+		$Explosion.play()
 
 func _crash_plane():
 	$Explosion.play()

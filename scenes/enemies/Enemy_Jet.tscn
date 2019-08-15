@@ -50,7 +50,6 @@ process_material = SubResource( 3 )
 
 [node name="shotTimer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
 [node name="Engine" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )

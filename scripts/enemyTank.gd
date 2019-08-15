@@ -39,6 +39,10 @@ func _ready():
 	
 func hit_by_projectile():	
 	STATE = STATE_KILLED
+	emit_signal("minus_enemy_count", TYPE)
+	remove_child($Hitbox)
+	sprite.visible = false
+	$Engine.stop()
 	$Explosion.play()
 	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()	
 	explosionParticles.position = self.global_position
@@ -58,14 +62,8 @@ func _physics_process(delta):
 		$Hitbox.scale.x = 2 * DIRECTION
 		linear_vel.x = speed * DIRECTION
 	
-	if STATE == STATE_KILLED:
-		emit_signal("minus_enemy_count", TYPE)
-		sprite.visible = false
-		$Engine.stop()
-		remove_child($Hitbox)
-		if !$Explosion.playing:
-			queue_free()
-		
+	if STATE == STATE_KILLED && !$Explosion.playing:
+		queue_free()
 
 func _on_shotTimer_timeout():
 		var shot = projectile.instance()
