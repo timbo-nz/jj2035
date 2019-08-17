@@ -27,14 +27,12 @@ func _ready():
 	var pitchScale = rand_range(0.85, 1.2)
 	$Engine.set_pitch_scale(pitchScale)
 	$Explosion.set_pitch_scale(rand_range(0.6, 0.8))
-	var waitTime = rand_range(1, 4)
-	$shotTimer.set_wait_time(waitTime)
-	$shotTimer.start()
 	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	if self.linear_velocity.x < 0:
 		sprite.scale.x = -1
 		hitbox.scale.x = -1
@@ -52,25 +50,6 @@ func _process(delta):
 
 func hit_by_projectile():
 	_crash_plane()
-
-func _on_VisibilityNotifier2D_screen_exited():
-	#print("jet deleted self")
-	#emit_signal("minus_enemy_count")
-	#queue_free()
-	pass # Replace with function body.
-
-
-func _on_shotTimer_timeout():
-		if STATE == STATE_LIVE:
-			var shot = projectile.instance()
-			shot.position = $Sprite.global_position #use node for shoot position		
-			shot.linear_velocity = Vector2(self.linear_velocity.x + 200 * sprite.scale.x, self.linear_velocity.y)
-			shot.add_collision_exception_with(self) # don't want player to collide with bullet
-			get_parent().add_child(shot) #don't want bullet to move with me, so add it as child of parent
-		else:
-			$shotTimer.stop()
-	
-
 
 func _on_Enemy_Jet_body_entered(body):
 	if body.has_method("player_collision"):
@@ -102,3 +81,17 @@ func _crash_plane():
 	var smokeParticles = preload("res://scenes/particles/smoke_particles.tscn").instance()
 	add_child(fireParticles)
 	add_child(smokeParticles)
+	
+func _shoot(target):
+	var shot_velocity = (target.global_position - self.global_position).normalized() * 800
+	$Firing.play()
+	var shot = projectile.instance()
+	shot.position = $Sprite/GunPos.global_position #use node for shoot position		
+	shot.linear_velocity = shot_velocity
+	shot.add_collision_exception_with(self) # don't want player to collide with bullet
+	get_parent().add_child(shot) #don't want bullet to move with me, so add it as child of parent
+	 
+
+func _on_GunZone_body_entered(body):
+	if (body.name == "Player"):
+		_shoot(body)

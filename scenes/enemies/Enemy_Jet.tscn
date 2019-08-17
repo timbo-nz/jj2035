@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Enemy_Jet.gd" type="Script" id=1]
 [ext_resource path="res://scenes/projectiles/pTracer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sprites/air_sprites/air_units/eJet.png" type="Texture" id=3]
 [ext_resource path="res://sfx/enemy-jet-engine.wav" type="AudioStream" id=4]
 [ext_resource path="res://sfx/Howitzer,M101,C3,105 mm,Distant,Right Side,Shot,Explode,Crack,Sweetener.wav" type="AudioStream" id=5]
+[ext_resource path="res://sfx/single-shot.wav" type="AudioStream" id=6]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 0.552941, 0.709804, 0.423529, 0.423529, 0 )
@@ -24,6 +25,9 @@ angle_random = 1.0
 scale = 4.0
 scale_random = 1.0
 color_ramp = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 287, 101 )
 
 [node name="Enemy_Jet" type="RigidBody2D"]
 collision_layer = 2
@@ -48,8 +52,14 @@ lifetime = 0.2
 local_coords = false
 process_material = SubResource( 3 )
 
-[node name="shotTimer" type="Timer" parent="."]
-wait_time = 2.0
+[node name="GunPos" type="Position2D" parent="Sprite"]
+position = Vector2( 14, 3 )
+
+[node name="GunZone" type="Area2D" parent="Sprite"]
+
+[node name="GunZoneCol" type="CollisionShape2D" parent="Sprite/GunZone"]
+position = Vector2( 288, 5 )
+shape = SubResource( 4 )
 
 [node name="Engine" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -60,5 +70,10 @@ max_distance = 1000.0
 [node name="Explosion" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = -12.0
+
+[node name="Firing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -12.0
+pitch_scale = 0.6
 [connection signal="body_entered" from="." to="." method="_on_Enemy_Jet_body_entered"]
-[connection signal="timeout" from="shotTimer" to="." method="_on_shotTimer_timeout"]
+[connection signal="body_entered" from="Sprite/GunZone" to="." method="_on_GunZone_body_entered"]

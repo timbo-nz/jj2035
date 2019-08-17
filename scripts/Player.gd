@@ -102,8 +102,7 @@ func _physics_process(delta):
 		get_parent().add_child(explosionParticles)
 
 func hit_by_projectile():
-	# STATE = STATE_KILLED
-	pass
+	STATE = STATE_KILLED
 
 func _on_deathTimer_timeout():
 	queue_free()

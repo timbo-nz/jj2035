@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/AA.gd" type="Script" id=1]
 [ext_resource path="res://sprites/ground_sprites/aa_gun.png" type="Texture" id=2]
 [ext_resource path="res://sprites/ground_sprites/aa.png" type="Texture" id=3]
-[ext_resource path="res://sfx/single-shot.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/L7A2_GPMG_7.62x51mm_belt_fed_50m_behind_Schoeps_B_clean_Single_shots_tracer_x_2.wav" type="AudioStream" id=4]
 
 [node name="aa" type="StaticBody2D"]
 collision_layer = 2
@@ -35,4 +35,4 @@ __meta__ = {
 
 [node name="Shoot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
-volume_db = -12.0
+volume_db = -8.0

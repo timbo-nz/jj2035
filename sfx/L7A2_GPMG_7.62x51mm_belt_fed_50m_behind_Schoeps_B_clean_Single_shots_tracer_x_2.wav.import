@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/L7A2_GPMG_7.62x51mm_belt_fed_50m_behind_Schoeps_B_clean_Single_shots_tracer_x_2.wav-8ee251f94162526d6877a9281a942f64.sample"
+
+[deps]
+
+source_file="res://sfx/L7A2_GPMG_7.62x51mm_belt_fed_50m_behind_Schoeps_B_clean_Single_shots_tracer_x_2.wav"
+dest_files=[ "res://.import/L7A2_GPMG_7.62x51mm_belt_fed_50m_behind_Schoeps_B_clean_Single_shots_tracer_x_2.wav-8ee251f94162526d6877a9281a942f64.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
