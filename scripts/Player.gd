@@ -60,8 +60,12 @@ func get_input():
 		if Input.is_action_just_pressed('up'):
 			if vThrottle > vMax * -1:
 				vThrottle -= 1
-		if Input.is_action_just_pressed('suicide'):
-			player_collision()
+#		if Input.is_action_just_pressed('suicide'):
+#			player_collision()
+#		if Input.is_action_just_pressed('game_over'):
+#			get_tree().change_scene("res://scenes/Game_Over.tscn")
+#		if Input.is_action_just_pressed('win_game'):
+#			GameController.victoryBool = true
 		velocity.x = hThrottle * hSpeed
 		velocity.y = vThrottle * vSpeed
 

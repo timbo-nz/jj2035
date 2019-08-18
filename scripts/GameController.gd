@@ -8,6 +8,7 @@ var currentLevel = 0
 var playerScore = 0
 export (int) var playerLives = 5
 var sessionHighScore = 0
+var victoryBool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,3 +29,4 @@ func reset():
 	playerLives = 5
 	currentLevel = 0
 	playerScore = 0
+	victoryBool = false

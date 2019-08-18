@@ -8,6 +8,10 @@ extends Node2D
 func _ready():
 	$VBoxContainer/FinalScore/ScoreCount.text = String(GameController.playerScore)
 	$VBoxContainer/HighScore/HiScoreValue.text = String(GameController.sessionHighScore)
+	
+	if GameController.victoryBool:
+		$VBoxContainer/Title.text = "VICTORY IS YOURS"
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
