@@ -83,5 +83,6 @@ stream = ExtResource( 5 )
 volume_db = -12.0
 autoplay = true
 [connection signal="update_hud_mission_status_text" from="." to="CanvasLayer/HUD" method="_on_Player_update_hud_mission_status_text"]
+[connection signal="update_hud_num_lives" from="." to="CanvasLayer/HUD" method="_on_Player_update_hud_num_lives"]
 [connection signal="update_hud_score" from="." to="CanvasLayer/HUD" method="_on_Player_update_hud_score"]
 [connection signal="timeout" from="deathTimer" to="." method="_on_deathTimer_timeout"]

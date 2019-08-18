@@ -17,7 +17,6 @@ var activeEnemies =  5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	emit_signal("update_mission_status_text", needed_to_win)
-	emit_signal("update_score")
 	red_skull.connect("minus_enemy_count", self, "_minus_enemy_count")
 
 func _process(delta):

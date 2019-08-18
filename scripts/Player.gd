@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal update_hud_score
 signal update_hud_mission_status_text
+signal update_hud_num_lives
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -59,6 +60,8 @@ func get_input():
 		if Input.is_action_just_pressed('up'):
 			if vThrottle > vMax * -1:
 				vThrottle -= 1
+		if Input.is_action_just_pressed('suicide'):
+			player_collision()
 		velocity.x = hThrottle * hSpeed
 		velocity.y = vThrottle * vSpeed
 
@@ -79,6 +82,7 @@ func transform_sprite():
 
 func player_collision():
 	STATE = STATE_KILLED
+	_on_decrement_num_lives()
 
 func _physics_process(delta):
 	get_input()
@@ -103,6 +107,7 @@ func _physics_process(delta):
 
 func hit_by_projectile():
 	STATE = STATE_KILLED
+	_on_decrement_num_lives()
 
 func _on_deathTimer_timeout():
 	queue_free()
@@ -112,5 +117,8 @@ func _on_update_score():
 	emit_signal("update_hud_score")
 
 func _on_update_mission_status_text(objectivesLeft):
-	print("mst", objectivesLeft)
 	emit_signal("update_hud_mission_status_text", objectivesLeft)
+
+func _on_decrement_num_lives():
+	GameController.decrementPlayerLives()
+	emit_signal("update_hud_num_lives", GameController.playerLives)

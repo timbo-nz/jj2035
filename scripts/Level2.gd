@@ -24,7 +24,6 @@ func _ready():
 	_spawn_objectives()
 	_spawn_intial_enemies(3)
 	emit_signal("update_mission_status_text", needed_to_win)
-	emit_signal("update_score")
 	pass # Replace with function body.
 
 func _spawn_objectives():	
