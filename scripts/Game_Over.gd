@@ -11,13 +11,8 @@ func _ready():
 	
 	if GameController.victoryBool:
 		$VBoxContainer/Title.text = "VICTORY IS YOURS"
-	
+
+
+func _on_Button_pressed():
+	get_tree().change_scene("res://scenes/levels/Level_1_Mission_Screen.tscn")
 	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func _process(delta):
-	if Input.is_action_just_pressed("shoot"):
-		get_tree().change_scene("res://scenes/levels/Level_1_Mission_Screen.tscn")

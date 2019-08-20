@@ -13,7 +13,7 @@ orbit_velocity_random = 0.0
 scale = 0.8
 
 [node name="Tracer" type="RigidBody2D"]
-collision_layer = 2
+collision_layer = 4
 contacts_reported = 1
 contact_monitor = true
 script = ExtResource( 1 )

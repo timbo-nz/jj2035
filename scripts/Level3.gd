@@ -3,6 +3,10 @@ extends Node
 signal update_score
 signal update_mission_status_text
 
+var tileSize = 32
+var mapSize = 6000
+var floorHeight = 1040
+
 var WIN_STATE = false
 
 onready var player = $Player
@@ -11,8 +15,8 @@ onready var red_skull = $RedSkull
 var objective_count = 0
 export (int) var needed_to_win
 
-var activeEnemies =  5
-
+var activeEnemies =  0
+var maxEnemies = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,16 +44,66 @@ func _minus_enemy_count(type):
 	if type == "WALKER":
 		GameController.playerScore += 100
 	if type == "BOMBER":
-		GameController.playerScore += 75
+		GameController.playerScore += 25
 	if type == "JET":
 		GameController.playerScore += 50
 	if type == "TANK":
 		GameController.playerScore += 50
 	emit_signal("update_score")
-	activeEnemies -= 1		
+	activeEnemies -= 1
+
+func _spawn_enemy():
+	if activeEnemies < maxEnemies:
+		var rand = rand_range(0,4)
+		if rand <= 1:
+			_spawn_jet()
+		elif rand > 1 && rand <= 2:
+			_spawn_bomber()
+		elif rand > 2 && rand <= 3:
+			_spawn_walker()
+		else:
+			_spawn_tank()
+		print(activeEnemies)	
+		
+
+func _spawn_tank():
+	activeEnemies += 1
+	var tank = preload("res://scenes/enemies/enemyTank.tscn").instance()
+	var position = Vector2(rand_range(16, mapSize/tileSize) * tileSize, floorHeight)
+	tank.connect("minus_enemy_count", self, "_minus_enemy_count")
+	tank.position = position
+	add_child(tank)
+
+func _spawn_jet():
+	activeEnemies += 1
+	var jet = preload("res://scenes/enemies/Enemy_Jet.tscn").instance()
+	var position = Vector2(rand_range(0, mapSize/tileSize) * tileSize, rand_range(32, floorHeight - 8 * 32))
+	jet.connect("minus_enemy_count", self, "_minus_enemy_count")
+	jet.position = position
+	jet.linear_velocity = Vector2(rand_range(jet.min_speed, jet.max_speed), 0)
+	add_child(jet)
+
+func _spawn_bomber():
+	activeEnemies += 1
+	var bomber = preload("res://scenes/enemies/Bomber.tscn").instance()
+	var position = Vector2(rand_range(0, mapSize/tileSize) * tileSize, rand_range(32, floorHeight - 8 * 32))
+	bomber.connect("minus_enemy_count", self, "_minus_enemy_count")
+	bomber.position = position	
+	bomber.linear_velocity = Vector2(rand_range(bomber.min_speed, bomber.max_speed), 0)
+	add_child(bomber)
+
+func _spawn_walker():
+	activeEnemies += 1
+	var walker = preload("res://scenes/enemies/eWalker.tscn").instance()
+	var position = Vector2(rand_range(16, mapSize/tileSize) * tileSize, floorHeight)
+	walker.connect("minus_enemy_count", self, "_minus_enemy_count")
+	walker.position = position	
+	add_child(walker)
 
 func _on_Base_base_entered():
-	print(WIN_STATE)
 	if WIN_STATE:
+		GameController.victoryBool = true
 		get_tree().change_scene("res://scenes/Game_Over.tscn")
 
+func _on_spawnTimer_timeout():
+	_spawn_enemy()

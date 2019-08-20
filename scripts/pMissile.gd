@@ -31,16 +31,29 @@ func _on_fuze_timeout():
 		_explode()
 
 func _on_Missile_body_entered(body):
-	_explode()
-	if body.has_method("hit_by_projectile"):
-		body.call("hit_by_projectile")
-	
+	if STATE != STATE_EXPLODED:
+		_explode()
 
 func _explode():
 	STATE = STATE_EXPLODED
 	$Explosion.play()
+	
+	var fragParticles = preload("res://scenes/particles/frag_particles.tscn").instance()
+	fragParticles.position = self.global_position
+	get_parent().add_child(fragParticles)
+	
+	var bodies = $fragArea.get_overlapping_bodies()	
+	
+	for body in bodies:
+		if body.has_method("hit_by_projectile") && body.name != "Player":
+			body.call("hit_by_projectile")
+	
 	remove_child($Hitbox)
 	$Sprite.visible = false
 	var explosionParticles = preload("res://scenes/particles/explosion_particles.tscn").instance()
 	explosionParticles.position = self.global_position
 	get_parent().add_child(explosionParticles)
+	
+func _on_proximityFuze_body_entered(body):
+	if STATE != STATE_EXPLODED && body.name != "Player":
+		_explode()

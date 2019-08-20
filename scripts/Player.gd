@@ -85,8 +85,9 @@ func transform_sprite():
 	hitbox.rotation = deg2rad(vThrottle * 5 * sprite.scale.x)
 
 func player_collision():
-	STATE = STATE_KILLED
-	_on_decrement_num_lives()
+	if STATE != STATE_KILLED:
+		STATE = STATE_KILLED
+		_on_decrement_num_lives()
 
 func _physics_process(delta):
 	get_input()
@@ -110,8 +111,9 @@ func _physics_process(delta):
 		get_parent().add_child(explosionParticles)
 
 func hit_by_projectile():
-	STATE = STATE_KILLED
-	_on_decrement_num_lives()
+	if STATE != STATE_KILLED:
+		STATE = STATE_KILLED
+		_on_decrement_num_lives()
 
 func _on_deathTimer_timeout():
 	queue_free()

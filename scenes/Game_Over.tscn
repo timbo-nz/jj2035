@@ -46,3 +46,10 @@ margin_left = 76.0
 margin_right = 84.0
 margin_bottom = 14.0
 text = "0"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 85.0
+margin_bottom = 74.0
+text = "OK"
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

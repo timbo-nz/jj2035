@@ -76,6 +76,7 @@ func _die():
 
 func hit_by_projectile():
 	HP -= 1
+	sprite.play("take_damage")
 	if HP == 0:
 		remove_child($Hitbox)
 		STATE = STATE_DEAD
