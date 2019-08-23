@@ -15,6 +15,7 @@ var speed
 export (PackedScene) var projectile
 
 onready var sprite = $AnimatedSprite
+onready var shotPos = $AnimatedSprite/shotPos
 
 const GRAVITY_VEC = Vector2(0, 900)
 const FLOOR_NORMAL = Vector2(0, -1)
@@ -36,6 +37,7 @@ func _ready():
 	STATE = STATE_ALIVE
 	speed = rand_range(min_speed, max_speed)
 	$Engine.set_pitch_scale(rand_range(0.85, 1.2))
+	$Shoot.set_pitch_scale(rand_range(0.85, 1.2))
 	
 func hit_by_projectile():	
 	STATE = STATE_KILLED
@@ -67,7 +69,8 @@ func _physics_process(delta):
 
 func _on_shotTimer_timeout():
 		var shot = projectile.instance()
-		shot.position = sprite.global_position #use node for shoot position		
+		$Shoot.play()
+		shot.position = shotPos.global_position #use node for shoot position		
 		shot.linear_velocity = Vector2(linear_vel.x + 200 * sprite.scale.x, -150)
 		shot.add_collision_exception_with(self) # don't want player to collide with bullet
 		get_parent().add_child(shot) #don't want bullet to move with me, so add it as child of parent

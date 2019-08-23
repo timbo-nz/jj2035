@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/projectiles/heatseeker.gd" type="Script" id=1]
+[ext_resource path="res://sprites/projectiles/projectile_0.png" type="Texture" id=2]
+[ext_resource path="res://sfx/Howitzer,M101,C3,105 mm,Distant,Right Side,Shot,Explode,Crack,Sweetener.wav" type="AudioStream" id=3]
+[ext_resource path="res://sfx/Whoosh,Organic,Fabric,Glove,Airy,Breathy,Punchy.wav" type="AudioStream" id=4]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.474074, 1 )
+colors = PoolColorArray( 0.341797, 0.336456, 0.336456, 1, 0.685547, 0.648056, 0.648056, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 0.5
+flag_disable_z = true
+spread = 15.0
+gravity = Vector3( 0, 1, 0 )
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.9
+scale_random = 0.7
+color_ramp = SubResource( 2 )
+hue_variation = -0.83
+hue_variation_random = 0.05
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 4, 1 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 24.5051
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 15.0748
+
+[node name="Heatseeker" type="KinematicBody2D"]
+scale = Vector2( 2, 2 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 1 )
+SPEED = 800
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="smokeParticles" type="Particles2D" parent="Sprite"]
+position = Vector2( -3, 0 )
+rotation = -3.14159
+amount = 16
+local_coords = false
+process_material = SubResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="fuze" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -12.0
+
+[node name="Whoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -12.0
+autoplay = true
+
+[node name="fragArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="hitbox" type="CollisionShape2D" parent="fragArea"]
+shape = SubResource( 5 )
+
+[node name="proximityFuze" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="proximityFuze"]
+shape = SubResource( 6 )
+[connection signal="timeout" from="fuze" to="." method="_on_fuze_timeout"]
+[connection signal="body_entered" from="proximityFuze" to="." method="_on_proximityFuze_body_entered"]

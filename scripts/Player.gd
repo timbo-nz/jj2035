@@ -22,6 +22,8 @@ var STATE_KILLED = "STATE_KILLED"
 
 var STATE = STATE_LIVE
 
+var TYPE = "Player"
+
 var vThrottle = 0
 var hThrottle = 0
 

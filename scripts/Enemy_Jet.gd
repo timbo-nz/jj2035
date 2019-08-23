@@ -58,7 +58,7 @@ func _on_Enemy_Jet_body_entered(body):
 	if STATE == STATE_KILLED:
 		_explode()
 	
-	if STATE == STATE_EXPLODED && !$Explosion.playing:
+	if STATE == STATE_EXPLODED:
 		queue_free()
 
 func _explode():
@@ -93,5 +93,5 @@ func _shoot(target):
 	 
 
 func _on_GunZone_body_entered(body):
-	if (body.name == "Player"):
+	if (body.name == "Player") && STATE == STATE_LIVE:
 		_shoot(body)

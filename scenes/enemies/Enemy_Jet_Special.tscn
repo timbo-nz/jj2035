@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/Enemy_Jet_Special.gd" type="Script" id=1]
+[ext_resource path="res://scenes/projectiles/heatseeker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/air_sprites/air_units/e_jet_ace.png" type="Texture" id=3]
+[ext_resource path="res://sfx/enemy-jet-engine.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/Howitzer,M101,C3,105 mm,Distant,Right Side,Shot,Explode,Crack,Sweetener.wav" type="AudioStream" id=5]
+[ext_resource path="res://sfx/single-shot.wav" type="AudioStream" id=6]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 1, 1, 0.552941, 0.709804, 0.423529, 0.423529, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 360.0
+angle_random = 1.0
+scale = 4.0
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 287, 101 )
+
+[node name="Enemy_Jet" type="RigidBody2D"]
+collision_layer = 2
+mass = 1514.29
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+projectile = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 32, 64, 32 )
+
+[node name="Particles2D" type="Particles2D" parent="Sprite"]
+position = Vector2( -26, 3 )
+lifetime = 0.2
+local_coords = false
+process_material = SubResource( 3 )
+
+[node name="GunPos" type="Position2D" parent="Sprite"]
+position = Vector2( 14, 3 )
+
+[node name="GunZone" type="Area2D" parent="Sprite"]
+
+[node name="GunZoneCol" type="CollisionShape2D" parent="Sprite/GunZone"]
+position = Vector2( 288, 5 )
+shape = SubResource( 4 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -30, 5, -26, 7, 25, 7, 28, 4, 25, 0, 22, 0, 21, -2, 17, -2, 16, 0, -19, 0, -24, -8, -32, -8, -32, -4, -29, 1, -30, 3 )
+
+[node name="Engine" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -12.0
+autoplay = true
+max_distance = 1000.0
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -12.0
+
+[node name="Firing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
+volume_db = -12.0
+pitch_scale = 0.6
+[connection signal="body_entered" from="." to="." method="_on_Enemy_Jet_body_entered"]
+[connection signal="body_entered" from="Sprite/GunZone" to="." method="_on_GunZone_body_entered"]

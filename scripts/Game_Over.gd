@@ -14,5 +14,5 @@ func _ready():
 
 
 func _on_Button_pressed():
-	get_tree().change_scene("res://scenes/levels/Level_1_Mission_Screen.tscn")
+	get_tree().change_scene("res://scenes/TitleScreen.tscn")
 	pass # Replace with function body.
