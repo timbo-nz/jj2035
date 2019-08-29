@@ -11,6 +11,3 @@ func _process(delta):
 func _start_game():
 	GameController.reset()
 	get_tree().change_scene("res://scenes/levels/Level1.tscn")
-
-func _on_StartButton_pressed():
-	_start_game()
