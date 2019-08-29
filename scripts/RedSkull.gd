@@ -35,7 +35,7 @@ func _process(delta):
 	
 	var new_anim = "idle"
 	
-	if self.global_position.distance_to(playerPos) < 800:
+	if self.global_position.distance_to(playerPos) < 1200:
 		ALERTED = true
 	
 	if STATE == STATE_ALIVE && !ALERTED:

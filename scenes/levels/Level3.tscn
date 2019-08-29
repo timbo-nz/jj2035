@@ -27,7 +27,7 @@ autostart = true
 position = Vector2( 128, 1025.2 )
 
 [node name="RedSkull" parent="." instance=ExtResource( 6 )]
-position = Vector2( 1961, 800 )
+position = Vector2( 2162, 448 )
 HP = 7
 [connection signal="update_mission_status_text" from="." to="Player" method="_on_update_mission_status_text"]
 [connection signal="update_score" from="." to="Player" method="_on_update_score"]
