@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Node2D.gd" type="Script" id=2]
 [ext_resource path="res://sprites/air_sprites/air_units/f35.png" type="Texture" id=3]
-[ext_resource path="res://scenes/parallaxBg.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sprites/hud/hud_bg.png" type="Texture" id=4]
+[ext_resource path="res://scenes/parallaxBg.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0148148, 0.333333, 0.674074, 1 )
@@ -96,18 +97,35 @@ margin_right = 184.0
 margin_bottom = 20.0
 text = "Start"
 
-[node name="options_button" type="Button" parent="camera_surrogate/MarginContainer/VBoxContainer"]
+[node name="quit_button" type="Button" parent="camera_surrogate/MarginContainer/VBoxContainer"]
 margin_top = 24.0
 margin_right = 184.0
 margin_bottom = 44.0
-text = "Options"
-
-[node name="quit_button" type="Button" parent="camera_surrogate/MarginContainer/VBoxContainer"]
-margin_top = 48.0
-margin_right = 184.0
-margin_bottom = 68.0
 text = "Quit"
 
-[node name="parallaxBg" parent="." instance=ExtResource( 4 )]
+[node name="MarginContainer3" type="MarginContainer" parent="camera_surrogate"]
+margin_left = 608.0
+margin_top = 1024.0
+margin_right = 1005.0
+margin_bottom = 1089.0
+
+[node name="TextureRect" type="TextureRect" parent="camera_surrogate/MarginContainer3"]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_right = 397.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 397, 48 )
+texture = ExtResource( 4 )
+stretch_mode = 2
+
+[node name="music_credits" type="Label" parent="camera_surrogate/MarginContainer3"]
+margin_right = 397.0
+margin_bottom = 65.0
+text = "Music 
+\"Prelude and Action\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/"
+align = 1
+
+[node name="parallaxBg" parent="." instance=ExtResource( 5 )]
 [connection signal="pressed" from="camera_surrogate/MarginContainer/VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="camera_surrogate/MarginContainer/VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
