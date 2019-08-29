@@ -15,15 +15,16 @@ func _ready():
 	$Music.play()
 	pass # Replace with function body.
 
+func _process(delta):
+	if sessionHighScore < playerScore:
+		sessionHighScore = playerScore
+
 func decrementPlayerLives():
 	playerLives -= 1
 	if playerLives == 0:
 		_game_over()
 	
 func _game_over():
-	if sessionHighScore < playerScore:
-		sessionHighScore = playerScore
-		
 	get_tree().change_scene("res://scenes/Game_Over.tscn")
 
 func reset():

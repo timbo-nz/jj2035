@@ -1,70 +1,283 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Level_1_Mission_Screen.gd" type="Script" id=1]
 [ext_resource path="res://sprites/air_sprites/air_units/eJet.png" type="Texture" id=2]
 [ext_resource path="res://sprites/air_sprites/air_units_big/bomber_0.png" type="Texture" id=3]
 [ext_resource path="res://sprites/ground_sprites/tank1.png" type="Texture" id=4]
+[ext_resource path="res://scenes/parallaxBg.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sprites/ground_sprites/groundTile/ground_2.png" type="Texture" id=6]
+[ext_resource path="res://sprites/ground_sprites/baseTower.png" type="Texture" id=7]
+[ext_resource path="res://sprites/ground_sprites/basePad.png" type="Texture" id=8]
+[ext_resource path="res://sprites/air_sprites/air_units/f35.png" type="Texture" id=9]
 
 [node name="Level_1_Mission_Screen" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="EnemyJet" type="TextureRect" parent="."]
-margin_left = 416.0
+margin_left = 544.0
 margin_top = 384.0
-margin_right = 512.0
+margin_right = 640.0
 margin_bottom = 416.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
 [node name="EnemyBomber" type="TextureRect" parent="."]
-margin_left = 416.0
-margin_top = 224.0
-margin_right = 608.0
-margin_bottom = 288.0
+margin_left = 480.0
+margin_top = 416.0
+margin_right = 672.0
+margin_bottom = 480.0
 texture = ExtResource( 3 )
 stretch_mode = 4
 
 [node name="EnemyTank" type="TextureRect" parent="."]
-margin_left = 512.0
-margin_top = 352.0
-margin_right = 560.0
-margin_bottom = 384.0
+margin_left = 544.0
+margin_top = 512.0
+margin_right = 592.0
+margin_bottom = 544.0
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 stretch_mode = 4
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 416.0
-margin_top = 448.0
-margin_right = 608.0
-margin_bottom = 480.0
+margin_left = 800.0
+margin_top = 544.0
+margin_right = 992.0
+margin_bottom = 576.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Press Spacebar to Begin"
 align = 1
 valign = 1
 
 [node name="Label3" type="Label" parent="."]
-margin_left = 416.0
-margin_top = 192.0
-margin_right = 608.0
-margin_bottom = 224.0
-text = "Primary Targets"
+margin_left = 480.0
+margin_top = 352.0
+margin_right = 672.0
+margin_bottom = 384.0
+text = "Enemies"
+align = 1
+valign = 1
+
+[node name="Label6" type="Label" parent="."]
+margin_left = 544.0
+margin_top = 384.0
+margin_right = 736.0
+margin_bottom = 416.0
+text = "Jet"
+align = 1
+valign = 1
+
+[node name="Label7" type="Label" parent="."]
+margin_left = 576.0
+margin_top = 448.0
+margin_right = 768.0
+margin_bottom = 480.0
+text = "Bomber"
+align = 1
+valign = 1
+
+[node name="Label8" type="Label" parent="."]
+margin_left = 544.0
+margin_top = 544.0
+margin_right = 736.0
+margin_bottom = 576.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Tank"
 align = 1
 valign = 1
 
 [node name="Label4" type="Label" parent="."]
-margin_left = 416.0
-margin_top = 352.0
-margin_right = 608.0
-margin_bottom = 384.0
-text = "Targets of Opportunity"
+margin_left = 64.0
+margin_top = 512.0
+margin_right = 128.0
+margin_bottom = 544.0
+text = "You"
 align = 1
 valign = 1
 
 [node name="Label5" type="Label" parent="."]
-margin_left = 416.0
-margin_top = 288.0
-margin_right = 608.0
-margin_bottom = 320.0
-text = "Destroy 5 Bombers"
+margin_top = 480.0
+margin_right = 64.0
+margin_bottom = 512.0
+text = "Base"
 align = 1
 valign = 1
+
+[node name="parallaxBg" parent="." instance=ExtResource( 5 )]
+offset = Vector2( 0, -500 )
+transform = Transform2D( 1, 0, 0, 1, 0, -500 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Node"]
+position = Vector2( 0, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite12" type="Sprite" parent="Node"]
+position = Vector2( 224, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite15" type="Sprite" parent="Node"]
+position = Vector2( 448, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite22" type="Sprite" parent="Node"]
+position = Vector2( 672, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite35" type="Sprite" parent="Node"]
+position = Vector2( 896, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite2" type="Sprite" parent="Node"]
+position = Vector2( 32, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite13" type="Sprite" parent="Node"]
+position = Vector2( 256, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite17" type="Sprite" parent="Node"]
+position = Vector2( 480, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite24" type="Sprite" parent="Node"]
+position = Vector2( 704, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite31" type="Sprite" parent="Node"]
+position = Vector2( 928, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite3" type="Sprite" parent="Node"]
+position = Vector2( 64, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite10" type="Sprite" parent="Node"]
+position = Vector2( 288, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite20" type="Sprite" parent="Node"]
+position = Vector2( 512, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite23" type="Sprite" parent="Node"]
+position = Vector2( 736, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite29" type="Sprite" parent="Node"]
+position = Vector2( 960, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite4" type="Sprite" parent="Node"]
+position = Vector2( 96, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite8" type="Sprite" parent="Node"]
+position = Vector2( 320, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite21" type="Sprite" parent="Node"]
+position = Vector2( 544, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite27" type="Sprite" parent="Node"]
+position = Vector2( 768, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite32" type="Sprite" parent="Node"]
+position = Vector2( 992, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite5" type="Sprite" parent="Node"]
+position = Vector2( 128, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite14" type="Sprite" parent="Node"]
+position = Vector2( 352, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite18" type="Sprite" parent="Node"]
+position = Vector2( 576, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite25" type="Sprite" parent="Node"]
+position = Vector2( 800, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite6" type="Sprite" parent="Node"]
+position = Vector2( 160, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite9" type="Sprite" parent="Node"]
+position = Vector2( 384, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite19" type="Sprite" parent="Node"]
+position = Vector2( 608, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite26" type="Sprite" parent="Node"]
+position = Vector2( 832, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite7" type="Sprite" parent="Node"]
+position = Vector2( 192, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite11" type="Sprite" parent="Node"]
+position = Vector2( 416, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite16" type="Sprite" parent="Node"]
+position = Vector2( 640, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite28" type="Sprite" parent="Node"]
+position = Vector2( 864, 576 )
+texture = ExtResource( 6 )
+offset = Vector2( 16, 16 )
+
+[node name="Sprite30" type="Sprite" parent="Node"]
+position = Vector2( 32, 544 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="Sprite33" type="Sprite" parent="Node"]
+position = Vector2( 96, 544 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 8 )
+
+[node name="Sprite34" type="Sprite" parent="Node"]
+position = Vector2( 96, 560 )
+texture = ExtResource( 9 )
