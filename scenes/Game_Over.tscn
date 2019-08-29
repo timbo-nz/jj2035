@@ -1,55 +1,86 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Game_Over.gd" type="Script" id=1]
+[ext_resource path="res://scenes/CameraSurrogate.gd" type="Script" id=2]
+[ext_resource path="res://scenes/parallaxBg.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/hud/hud_bg.png" type="Texture" id=4]
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-alignment = 1
+[node name="CameraSurrogate" type="Node2D" parent="."]
+script = ExtResource( 2 )
 
-[node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 85.0
+[node name="Camera2D" type="Camera2D" parent="CameraSurrogate"]
+anchor_mode = 0
+current = true
+
+[node name="parallaxBg" parent="CameraSurrogate" instance=ExtResource( 3 )]
+offset = Vector2( 0, -480 )
+transform = Transform2D( 1, 0, 0, 1, 0, -480 )
+
+[node name="CenterContainer" type="CenterContainer" parent="CameraSurrogate"]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="TextureRect" type="TextureRect" parent="CameraSurrogate/CenterContainer"]
+modulate = Color( 1, 1, 1, 0.588235 )
+margin_left = 392.0
+margin_top = 240.0
+margin_right = 632.0
+margin_bottom = 360.0
+rect_min_size = Vector2( 240, 120 )
+texture = ExtResource( 4 )
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CameraSurrogate/CenterContainer"]
+margin_left = 470.0
+margin_top = 263.0
+margin_right = 554.0
+margin_bottom = 337.0
+
+[node name="Title" type="Label" parent="CameraSurrogate/CenterContainer/VBoxContainer"]
+margin_right = 84.0
 margin_bottom = 14.0
-text = "GAME OVER"
+text = "Game Over"
+align = 1
 
-[node name="FinalScore" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ScoreContainer" type="HBoxContainer" parent="CameraSurrogate/CenterContainer/VBoxContainer"]
 margin_top = 18.0
-margin_right = 85.0
+margin_right = 84.0
 margin_bottom = 32.0
 
-[node name="ScoreLabel" type="Label" parent="VBoxContainer/FinalScore"]
-margin_right = 73.0
+[node name="scoreLabel" type="Label" parent="CameraSurrogate/CenterContainer/VBoxContainer/ScoreContainer"]
+margin_right = 39.0
 margin_bottom = 14.0
-text = "Final Score:"
+text = "Score:"
 
-[node name="ScoreCount" type="Label" parent="VBoxContainer/FinalScore"]
-margin_left = 77.0
-margin_right = 85.0
+[node name="scoreValue" type="Label" parent="CameraSurrogate/CenterContainer/VBoxContainer/ScoreContainer"]
+margin_left = 43.0
+margin_right = 51.0
 margin_bottom = 14.0
 text = "0"
 
-[node name="HighScore" type="HBoxContainer" parent="VBoxContainer"]
+[node name="hiScoreContainer" type="HBoxContainer" parent="CameraSurrogate/CenterContainer/VBoxContainer"]
 margin_top = 36.0
-margin_right = 85.0
+margin_right = 84.0
 margin_bottom = 50.0
 
-[node name="HiScoreLabel" type="Label" parent="VBoxContainer/HighScore"]
+[node name="scoreLabel" type="Label" parent="CameraSurrogate/CenterContainer/VBoxContainer/hiScoreContainer"]
 margin_right = 72.0
 margin_bottom = 14.0
 text = "High Score:"
 
-[node name="HiScoreValue" type="Label" parent="VBoxContainer/HighScore"]
+[node name="scoreValue" type="Label" parent="CameraSurrogate/CenterContainer/VBoxContainer/hiScoreContainer"]
 margin_left = 76.0
 margin_right = 84.0
 margin_bottom = 14.0
 text = "0"
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="CameraSurrogate/CenterContainer/VBoxContainer"]
 margin_top = 54.0
-margin_right = 85.0
+margin_right = 84.0
 margin_bottom = 74.0
+mouse_default_cursor_shape = 2
 text = "OK"
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CameraSurrogate/CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

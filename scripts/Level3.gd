@@ -18,6 +18,8 @@ export (int) var needed_to_win
 var activeEnemies =  0
 var maxEnemies = 15
 
+onready var redSkull = $RedSkull
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	emit_signal("update_mission_status_text", needed_to_win)
@@ -25,12 +27,17 @@ func _ready():
 
 func _process(delta):
 	_check_win()
-	if player.position.x > 6000:
-		player.position.x = 0
-	if player.position.x < 0:
-		player.position.x = 6000
-	if player.position.y < 0:
-		player.position.y = 0
+	
+	_bind_to_map_boundary(player)
+	_bind_to_map_boundary(redSkull)
+	
+func _bind_to_map_boundary(entity):
+	if entity.position.x > 6000:
+		entity.position.x = 0
+	if entity.position.x < 0:
+		entity.position.x = 6000
+	if entity.position.y < 0:
+		entity.position.y = 0
 		
 func _check_win():
 	if objective_count >= needed_to_win:

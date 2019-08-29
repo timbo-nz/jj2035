@@ -5,20 +5,20 @@
 [ext_resource path="res://sprites/air_sprites/air_units/f35.png" type="Texture" id=3]
 [ext_resource path="res://scenes/parallaxBg.tscn" type="PackedScene" id=4]
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0.0148148, 0.333333, 0.674074, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.784314, 0.0627451, 0.815686, 0.960784, 0.588235, 0.901961, 0.4, 0.203922, 0.588235, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.153495, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
@@ -29,14 +29,14 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 4.0
 scale_random = 0.2
-scale_curve = SubResource( 6 )
-color_ramp = SubResource( 4 )
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=6]
 colors = PoolColorArray( 0, 0, 0, 0.588235, 0, 0, 0, 0.588235 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 width = 512
 
 [node name="TitleScreen" type="Node2D"]
@@ -53,10 +53,11 @@ texture = ExtResource( 3 )
 [node name="Particles2D" type="Particles2D" parent="camera_surrogate/Sprite"]
 position = Vector2( -24.3771, 2.67932 )
 amount = 16
-process_material = SubResource( 7 )
+process_material = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="camera_surrogate"]
-position = Vector2( 512, 800 )
+position = Vector2( 0, 500 )
+anchor_mode = 0
 current = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="camera_surrogate"]
@@ -68,7 +69,7 @@ margin_bottom = 800.0
 [node name="TextureRect" type="TextureRect" parent="camera_surrogate/MarginContainer2"]
 margin_right = 184.0
 margin_bottom = 100.0
-texture = SubResource( 2 )
+texture = SubResource( 7 )
 expand = true
 
 [node name="Label" type="Label" parent="camera_surrogate/MarginContainer2"]
